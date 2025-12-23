@@ -1,98 +1,104 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import MainBodyComponent from '@/components/HomeFeedComponents/mainBodyComponent';
+import SuggestionBox from '@/components/HomeFeedComponents/suggestionBox';
+import { useUser } from '@/contexts/UserContext';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { ScrollView } from 'react-native';
+import { SafeAreaView as RNCSafeAreaView } from 'react-native-safe-area-context';
+import { moderateScale } from 'react-native-size-matters';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const router = useRouter();
+  const { username } = useUser();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  return (
+    <RNCSafeAreaView
+      edges={["top", "left", "right"]}
+      style={{ flex: 1, backgroundColor: "#09090B" }}
+    >
+      <ScrollView
+        style={{ flex:1 }}
+      >
+        {/*Header Component*/}
+        <View
+          style={headerStyle.headerContainer}
+        >
+          <View
+            style={headerStyle.headerTitleContainer}
+          >
+            <Text style={headerStyle.headerTitle}>
+              {username ? `${username}님의 홀인` : '홀인'} - 
+            </Text>
+            <Text style={headerStyle.headerSubTitle}>1등 스토어 AI 트레커</Text>
+          </View>
+          <Pressable
+            hitSlop={moderateScale(10)}
+            onPress={() => router.push('/modal')}
+            accessibilityRole="button"
+            accessibilityLabel="Open settings"
+          >
+            <Ionicons name="settings-outline" size={moderateScale(22)} color="#F4F4F5" />
+          </Pressable>
+        </View>
+        {/*seperator*/}
+        <View
+          style={{
+            marginVertical: moderateScale(20),
+            height: 3,
+            width: "100%",
+            backgroundColor: "#18181B",
+          }}
+        />
+
+        {/*Body Component*/}
+        <MainBodyComponent />
+        {/*suggestion box header*/}
+        <Text
+          style={{fontSize: 20, fontWeight: "700", color: "white", marginHorizontal: 15, marginBottom: 10}}
+        >건의함</Text>
+        {/*suggestion box*/}
+        <SuggestionBox/>
+        {/*padding bottom*/}
+        <View
+          style={{height: moderateScale(20)}}
+        />
+      </ScrollView>
+    </RNCSafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  suggestionBoxContainer: {
+    backgroundColor: "#18181b",
+    borderRadius: 10,
+    borderColor: "#27272A",
+    borderWidth: 1,
+    padding: 20,
+    marginHorizontal: 10,
+  }
 });
+
+const headerStyle = StyleSheet.create({
+  headerContainer: {
+    marginHorizontal: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'center',
+  },
+  headerTitleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#F4F4F5",
+  },
+  headerSubTitle: {
+    fontSize: 17,
+    fontWeight: "300",
+    color: "#f4f4f5b3",
+  }
+})

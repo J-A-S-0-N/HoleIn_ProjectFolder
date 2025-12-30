@@ -38,7 +38,7 @@ const SuggestionBox = () => {
             <View
                 style={{
                     height: 0.5,
-                    backgroundColor: "white",
+                    backgroundColor: "#7b7b7bff",
                 }}
             />
             <View
@@ -62,6 +62,7 @@ const SuggestionBox = () => {
                     height: moderateScale(80),
                     borderWidth: 1,
                     borderColor: "#27272A",
+                    backgroundColor: "#202023",
                     borderRadius: 10,
                     marginTop: 10,
                     color: "white",

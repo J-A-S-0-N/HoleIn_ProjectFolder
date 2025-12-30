@@ -173,6 +173,7 @@ const ScoreCardComponent = ({ item }: any) => {
                                 style={{
                                     color: "#9F9FA9",
                                     marginTop: 10,
+                                    marginBlock: 10,
                                     fontSize: 15,
                                 }}
                             >뒤 9홀 (10 ~ 18)</Text>

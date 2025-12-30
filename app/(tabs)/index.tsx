@@ -1,17 +1,30 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import MainBodyComponent from '@/components/HomeFeedComponents/mainBodyComponent';
 import SuggestionBox from '@/components/HomeFeedComponents/suggestionBox';
-import { useUser } from '@/contexts/UserContext';
+import InfoBoard from '@/components/HomeFeedComponents/InfoBoardComponent';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { ScrollView } from 'react-native';
 import { SafeAreaView as RNCSafeAreaView } from 'react-native-safe-area-context';
 import { moderateScale } from 'react-native-size-matters';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from 'react';
+import { USERNAME_STORAGE_KEY } from '@/contexts/UserContext';
+import { store } from 'expo-router/build/global-state/router-store';
 
 export default function HomeScreen() {
   const router = useRouter();
-  const { username } = useUser();
+  const [username, setUsername] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadUsername = async () => {
+      const storedUsername = await AsyncStorage.getItem(USERNAME_STORAGE_KEY);
+      setUsername(storedUsername);
+    };
+    loadUsername();
+  }, []);
+
 
   return (
     <RNCSafeAreaView
@@ -19,7 +32,7 @@ export default function HomeScreen() {
       style={{ flex: 1, backgroundColor: "#09090B" }}
     >
       <ScrollView
-        style={{ flex:1 }}
+        style={{ flex: 1 }}
       >
         {/*Header Component*/}
         <View
@@ -29,7 +42,7 @@ export default function HomeScreen() {
             style={headerStyle.headerTitleContainer}
           >
             <Text style={headerStyle.headerTitle}>
-              {username ? `${username}님의 홀인` : '홀인'} - 
+              {username ? `${username}님의 홀인` : '홀인'} -
             </Text>
             <Text style={headerStyle.headerSubTitle}>1등 스토어 AI 트레커</Text>
           </View>
@@ -51,18 +64,30 @@ export default function HomeScreen() {
             backgroundColor: "#18181B",
           }}
         />
-
+        {/*this is for testing ONLY !!!!!!!!*/}
+        {/*
+        <TouchableOpacity
+          style={{
+            padding: 20,
+            backgroundColor: "white",
+          }}
+          onPress={() => {
+            AsyncStorage.removeItem(USERNAME_STORAGE_KEY);
+            console.log("cleared username")
+          }}
+        >
+        </TouchableOpacity>
+        */}
         {/*Body Component*/}
         <MainBodyComponent />
-        {/*suggestion box header*/}
         <Text
-          style={{fontSize: 20, fontWeight: "700", color: "white", marginHorizontal: 15, marginBottom: 10}}
+          style={{ fontSize: 20, fontWeight: "700", color: "white", marginHorizontal: moderateScale(15), marginBottom: moderateScale(20), marginTop: moderateScale(20) }}
         >건의함</Text>
         {/*suggestion box*/}
-        <SuggestionBox/>
+        <SuggestionBox />
         {/*padding bottom*/}
         <View
-          style={{height: moderateScale(20)}}
+          style={{ height: moderateScale(20) }}
         />
       </ScrollView>
     </RNCSafeAreaView>
@@ -88,16 +113,17 @@ const headerStyle = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitleContainer: {
+    gap: moderateScale(5),
     flexDirection: "row",
     alignItems: "center",
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: "700",
     color: "#F4F4F5",
   },
   headerSubTitle: {
-    fontSize: 17,
+    fontSize: 19,
     fontWeight: "300",
     color: "#f4f4f5b3",
   }

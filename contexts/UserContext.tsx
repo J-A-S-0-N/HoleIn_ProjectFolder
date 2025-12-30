@@ -9,7 +9,17 @@ interface UserContextType {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-const USERNAME_STORAGE_KEY = '@holein_username';
+export const USERNAME_STORAGE_KEY = '@holein_username';
+
+export async function fetchUsername(): Promise<string | null> {
+  try {
+    const storedUsername = await AsyncStorage.getItem(USERNAME_STORAGE_KEY);
+    return storedUsername;
+  } catch (error) {
+    console.error('Failed to fetch username:', error);
+    return null;
+  }
+}
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [username, setUsernameState] = useState<string | null>(null);
@@ -41,6 +51,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
       throw error;
     }
   };
+
+  const getName = async () => {
+    return await AsyncStorage.getItem(USERNAME_STORAGE_KEY);
+  };
+
 
   return (
     <UserContext.Provider value={{ username, setUsername, isLoading }}>

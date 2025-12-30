@@ -1,5 +1,6 @@
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { StyleSheet, Text, View } from "react-native";
+import { moderateScale } from 'react-native-size-matters';
 
 const WeatherWidget = () => {
     return (
@@ -38,11 +39,11 @@ const styles = StyleSheet.create({
     },
     mainWeatherText: {
         color: "white",
-        fontSize: 25,
+        fontSize: moderateScale(24),
     },
     subWeatherText: {
         color: "#9F9FA9",
-        fontSize: 17
+        fontSize: moderateScale(20),
     },
     
 })

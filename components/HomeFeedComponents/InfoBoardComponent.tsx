@@ -2,47 +2,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { moderateScale } from "react-native-size-matters";
+import Important from "../InfoBoardComponents/important";
 
-const MainCameraButton = () => {
+const InfoBoard = () => {
     const router = useRouter();
 
     return (
-        <Pressable
-            style={({ pressed }) => [
-                styles.container,
-                pressed && styles.containerPressed,
-            ]}
-            onPress={() => {
-                //router.push("/(stacks)/camera");
-                router.push("/(stacks)/preCameraLoadingScreen");
-            }}
-        >
-            <View style={styles.circleGlow}>
-                <View style={styles.circleInner}>
-                    <Ionicons name="camera-outline" size={35} color="white" />
-                </View>
-            </View>
-            <Text
-                style={{
-                    color: "white",
-                    fontSize: 17,
-                    fontWeight: "700",
-                    marginTop: 5,
-                }}
-            >
-                스코어 카드 촬영
-            </Text>
-            <Text
-                style={{
-                    color: "white",
-                    fontSize: 17,
-                    fontWeight: "300",
-                    marginTop: 10,
-                }}
-            >
-                디스크를 촬영하여 점수를 기로하세요
-            </Text>
-        </Pressable>
+        <View>
+            <Important/>
+        </View>
     )
 }
 
@@ -53,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: "center",
         paddingTop : moderateScale(14),
-        marginTop: 15,
+        marginTop: 5,
         marginBottom: 15,
         shadowColor: "#3FFFB8",
         shadowOpacity: 0.25,
@@ -88,4 +56,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MainCameraButton
+export default InfoBoard;

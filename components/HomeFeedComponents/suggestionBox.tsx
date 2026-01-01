@@ -28,11 +28,11 @@ const SuggestionBox = () => {
             >
                 <Text
                     style={{
-                        fontSize: moderateScale(19),
+                        fontSize: moderateScale(18),
                         color: "white",
                     }}
                 >건의함</Text>
-                <Ionicons name="mail-open-outline" size={moderateScale(25)} color="#575757" />
+                <Ionicons name="mail-open-outline" size={moderateScale(23)} color="#575757" />
             </View>
             {/*sepeartor*/}
             <View
@@ -59,13 +59,14 @@ const SuggestionBox = () => {
                 style={{
                     fontSize: moderateScale(16),
                     padding: 10,
-                    height: moderateScale(80),
+                    height: moderateScale(100),
                     borderWidth: 1,
                     borderColor: "#27272A",
                     backgroundColor: "#202023",
                     borderRadius: 10,
                     marginTop: 10,
                     color: "white",
+                    textAlignVertical: "top",
                 }}
                 onChangeText={setText}
             />
@@ -75,7 +76,7 @@ const SuggestionBox = () => {
                 }}
                 style={{
                     marginTop: 10,
-                    padding: 10,
+                    padding: 15,
                     //backgroundColor: colors.moreButton,
                     backgroundColor: "#00b27769",
                     borderRadius: 5,
@@ -84,7 +85,7 @@ const SuggestionBox = () => {
                 <Text
                     style={{
                         fontSize: moderateScale(16),
-                        fontWeight: "900",
+                        fontWeight: "700",
                         color: "white",
                     }}
                 >

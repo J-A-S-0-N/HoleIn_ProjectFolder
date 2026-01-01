@@ -1,19 +1,18 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBabqAzNXpOxv5h8LCh0E2E6lQv7jUpVW8",
-  authDomain: "tomokkorea-live.firebaseapp.com",
-  projectId: "tomokkorea-live",
-  storageBucket: "tomokkorea-live.firebasestorage.app",
-  messagingSenderId: "833924019865",
-  appId: "1:833924019865:web:afc80c4de81ccbfb5a6a08",
-  measurementId: "G-SZZKSLJS18"
+  apiKey: "AIzaSyDDdF4ldhrnn9kEGe02l5sGPGsZT_b1JTI",
+  authDomain: "scorediskconv-dev.firebaseapp.com",
+  projectId: "scorediskconv-dev",
+  storageBucket: "scorediskconv-dev.firebasestorage.app",
+  messagingSenderId: "349231429430",
+  appId: "1:349231429430:web:13c72fc607340c0012e597",
+  measurementId: "G-7TLGCFEGN8"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app);
+const db = getFirestore(app); 
 
-export { app, db, storage };
+export default db;

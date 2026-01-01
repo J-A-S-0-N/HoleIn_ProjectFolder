@@ -13,6 +13,7 @@ export default function PeriodSelector({ value, onChange }: Props) {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        gap: 10,
       }}
     >
       <TouchableOpacity
@@ -20,10 +21,10 @@ export default function PeriodSelector({ value, onChange }: Props) {
         style={[
           styles.shadowButton,
           {
+            flex:1,
             borderRadius: 10,
             backgroundColor: value === 0 ? '#009966' : '#18181B',
             paddingVertical: 12,
-            paddingHorizontal: 47,
             justifyContent: 'center',
             alignItems: 'center',
           },
@@ -45,10 +46,10 @@ export default function PeriodSelector({ value, onChange }: Props) {
         style={[
           styles.shadowButton,
           {
+            flex:1,
             borderRadius: 10,
             backgroundColor: value === 1 ? '#009966' : '#18181B',
             paddingVertical: 12,
-            paddingHorizontal: 47,
             justifyContent: 'center',
             alignItems: 'center',
           },
@@ -70,10 +71,10 @@ export default function PeriodSelector({ value, onChange }: Props) {
         style={[
           styles.shadowButton,
           {
+            flex:1,
             borderRadius: 10,
             backgroundColor: value === 2 ? '#009966' : '#18181B',
             paddingVertical: 12,
-            paddingHorizontal: 47,
             justifyContent: 'center',
             alignItems: 'center',
           },

@@ -34,7 +34,7 @@ const MainCameraButton = () => {
             </Text>
             <Text
                 style={{
-                    color: "white",
+                    color: "#e7e7e7ff",
                     fontSize: 17,
                     fontWeight: "300",
                     marginTop: 10,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 14,
         shadowOffset: { width: 0, height: 0 },
-        elevation: 6,
+        elevation: 10,
     },
     containerPressed: {
         transform: [{ scale: 0.985 }],

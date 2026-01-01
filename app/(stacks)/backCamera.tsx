@@ -3,7 +3,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { moderateScale } from 'react-native-size-matters';
 
@@ -14,12 +14,17 @@ const Camera = () => {
 
     const cameraRef = useRef<CameraView>(null);
 
+    const [isNineHole, setIsNineHole] = useState(false);
+
     const takePictureNroute = async () => {
         if (cameraRef.current) {
             const photo = await cameraRef.current.takePictureAsync();
             setPhoto(photo.uri);
             console.log(photo); // Contains uri, width, height, etc.
-            router.push("/(stacks)/simpleLoadingScreen");
+            router.replace({
+                pathname: "./loadingRoute2Review",
+                params: { isNineHole: "false" },
+            });
         } else{
             console.log("cameraRef is null");
         }
@@ -215,6 +220,34 @@ const Camera = () => {
                         <Ionicons name="camera-outline" size={30} color="gray" />
                     </View>
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        Alert.alert(
+                            "뒷면 촬영을 건너뛰시겠습니까?",
+                            "건너뛰면 즉시 스코어 검토 화면으로 이동합니다.",
+                            [
+                                { text: "취소", style: "cancel" },
+                                { text: "확인", onPress: () => {
+                                    router.replace({
+                                        pathname: "./loadingRoute2Review",
+                                        params: { isNineHole: "true" }  
+                                    })
+                                }}
+                            ]
+                        );
+                    }}
+                    style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "80%",
+                        height:40,
+                        backgroundColor: "rgba(31, 136, 66, 1)",
+                        borderRadius: 10,
+                    }}
+                >
+                    <Text style={{ color: "white", fontSize: 15, fontWeight: "500" }}>뒤홀 건너뛰기</Text>
+                </TouchableOpacity>
             </View>
             <View style={{
                 position: "absolute",
@@ -299,10 +332,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0)',
     },
     buttonContainer: {
+        gap: 10,
         position: 'absolute',
         bottom: moderateScale(90),
-        alignSelf: 'center',
-        flexDirection: 'row',
+        left: 0,
+        right: 0,
+        width: '100%',
+        alignItems: "center",
+        //flexDirection: 'row',
         backgroundColor: 'transparent',
     },
     backButtonContainer: {

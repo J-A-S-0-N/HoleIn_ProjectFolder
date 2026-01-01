@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import { moderateScale } from "react-native-size-matters";
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 const Important = () => {
     return (
         <View
@@ -33,6 +34,7 @@ const Important = () => {
                 style={{
                     flex:1,
                     marginVertical: moderateScale(13),
+                    marginRight: moderateScale(20),
                 }}
             >
                 <View

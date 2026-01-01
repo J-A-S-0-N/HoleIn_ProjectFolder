@@ -13,7 +13,7 @@ export default function TabTwoScreen() {
   return (
     <SafeAreaView
       edges={["top", "left", "right"]}
-      style={{ flex: 1, backgroundColor: "#09090B" }}
+      style={{ flex: 1, backgroundColor: "#09090B", paddingHorizontal: moderateScale(10) }}
     >
       <UserScoreLog 
         ListHeaderComponent={
@@ -21,6 +21,7 @@ export default function TabTwoScreen() {
             {/*header*/}
             <View
               style={{
+                marginTop: moderateScale(10),
                 marginHorizontal: moderateScale(10),
                 flexDirection: "row",
                 alignItems: "center",
@@ -31,7 +32,7 @@ export default function TabTwoScreen() {
                 style={{
                   color: "white",
                   fontSize: moderateScale(25),
-                  fontWeight: "700",
+                  fontWeight: "600",
                 }}
               >스코어기록</Text>
             </View>

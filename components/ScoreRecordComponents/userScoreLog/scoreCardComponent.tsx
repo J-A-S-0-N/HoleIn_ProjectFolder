@@ -23,7 +23,7 @@ const ScoreCardComponent = ({ item }: any) => {
                     alignItems: "center",
                     backgroundColor: "#27272A",
                     paddingVertical: 10,
-                    paddingHorizontal: 5,
+                    flex:1,
                     gap: 3,
                 }}
             >
@@ -80,7 +80,7 @@ const ScoreCardComponent = ({ item }: any) => {
                                 color: "#9F9FA9",
                                 fontSize: 15,
                             }}
-                        >{formatDate(item.time)}</Text>
+                        >{formatDate(item.createdAt)}</Text>
                         <View
                             style={{
                                 flexDirection: "row",
@@ -140,6 +140,7 @@ const ScoreCardComponent = ({ item }: any) => {
                         flexDirection: "row",
                         justifyContent: "space-between",
                         marginTop: 10,
+                        gap: 10,
                     }}
                 >
                     {item.isNineHole ? (
@@ -210,7 +211,7 @@ const ScoreCardComponent = ({ item }: any) => {
                                 color: "#9F9FA9",
                                 fontSize: 15,
                             }}
-                        >{formatDate(item.time)}</Text>
+                        >{formatDate(item.createdAt)}</Text>
                         <View
                             style={{
                                 flexDirection: "row",

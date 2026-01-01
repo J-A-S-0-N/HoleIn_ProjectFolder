@@ -42,7 +42,7 @@ export default function HomeScreen() {
             style={headerStyle.headerTitleContainer}
           >
             <Text style={headerStyle.headerTitle}>
-              {username ? `${username}님의 홀인` : '홀인'} -
+              홀인 Hole in
             </Text>
             <Text style={headerStyle.headerSubTitle}>1등 스토어 AI 트레커</Text>
           </View>
@@ -113,18 +113,20 @@ const headerStyle = StyleSheet.create({
     alignItems: 'center',
   },
   headerTitleContainer: {
-    gap: moderateScale(5),
+    paddingTop: moderateScale(20),
+    paddingLeft: 10,
+    gap: moderateScale(10),
     flexDirection: "row",
     alignItems: "center",
   },
   headerTitle: {
     fontSize: 22,
-    fontWeight: "700",
+    fontWeight: "600",
     color: "#F4F4F5",
   },
   headerSubTitle: {
     fontSize: 19,
-    fontWeight: "300",
+    fontWeight: "400",
     color: "#f4f4f5b3",
   }
 })
